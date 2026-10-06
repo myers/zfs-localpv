@@ -102,6 +102,7 @@ The following table lists the configurable parameters of the OpenEBS ZFS Localpv
 | `zfsController.provisioner.image.registry`                            | string | `"registry.k8s.io/"`        | Image registry for the CSI provisioner.                                                                |
 | `zfsController.provisioner.image.repository`                          | string | `"sig-storage/csi-provisioner"` | Image repository for the CSI provisioner.                                                              |
 | `zfsController.provisioner.image.tag`                                 | string | `"v5.2.0"`                  | Image tag for the CSI provisioner.                                                                      |
+| `zfsController.provisioner.logLevel`                                  | int    | `5`                         | klog verbosity of the CSI provisioner (`--v`); set to `0` for the least verbose logging.                  |
 | `zfsController.provisioner.name`                                      | string | `"csi-provisioner"`         | Name of the CSI provisioner container.                                                                 |
 | `zfsController.replicas`                                              | int    | `1`                         | Number of replicas for the ZFS controller deployment.                                                  |
 | `zfsController.resizer.extraArgs`                                     | list   | `[]`                        | Additional arguments to pass to the CSI resizer.                                                       |
@@ -109,6 +110,7 @@ The following table lists the configurable parameters of the OpenEBS ZFS Localpv
 | `zfsController.resizer.image.registry`                                | string | `"registry.k8s.io/"`        | Image registry for the CSI resizer.                                                                    |
 | `zfsController.resizer.image.repository`                              | string | `"sig-storage/csi-resizer"` | Image repository for the CSI resizer.                                                                  |
 | `zfsController.resizer.image.tag`                                     | string | `"v1.13.2"`                 | Image tag for the CSI resizer.                                                                          |
+| `zfsController.resizer.logLevel`                                      | int    | `5`                         | klog verbosity of the CSI resizer (`--v`); set to `0` for the least verbose logging.                      |
 | `zfsController.resizer.name`                                          | string | `"csi-resizer"`             | Name of the CSI resizer container.                                                                     |
 | `zfsController.resources`                                             | map    | `{}`                        | Resource requests and limits for the ZFS controller pods.                                               |
 | `zfsController.securityContext`                                       | map    | `{}`                        | Security context for the ZFS controller pods.                                                          |
@@ -118,7 +120,9 @@ The following table lists the configurable parameters of the OpenEBS ZFS Localpv
 | `zfsController.snapshotController.image.registry`                     | string | `"registry.k8s.io/"`        | Image registry for the snapshot controller.                                                             |
 | `zfsController.snapshotController.image.repository`                   | string | `"sig-storage/snapshot-controller"` | Image repository for the snapshot controller.                                                           |
 | `zfsController.snapshotController.image.tag`                          | string | `"v8.2.0"`                  | Image tag for the snapshot controller. 
+| `zfsController.snapshotController.logLevel`                           | int    | `5`                         | klog verbosity of the snapshot controller (`--v`); set to `0` for the least verbose logging.              |
 | `zfsNode.defaultFormatOptions`                                        | map    | `{}`                        | Extra mkfs options per filesystem, used when the StorageClass of a volume does not set `formatOptions`. A StorageClass value replaces the default of its filesystem, the two are not merged. Keys are the formatted filesystem types (ext2, ext3, ext4, xfs, btrfs), values the space separated mkfs options of that filesystem as one string, e.g. `{"ext4": "-m 0", "xfs": "-i nrext64=0"}`. |
+| `zfsNode.driverRegistrar.logLevel`                                    | int    | `5`                         | klog verbosity of the CSI node driver registrar (`--v`); set to `0` for the least verbose logging.        |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

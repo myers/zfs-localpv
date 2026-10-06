@@ -3,6 +3,12 @@ v2.12.0 / yyyy-mm-dd
 
 New Features and Enhancements
 
+ - Configurable CSI sidecar log verbosity
+The Helm chart now accepts `logLevel` under `zfsNode.driverRegistrar`,
+`zfsController.resizer`, `zfsController.snapshotController`, and
+`zfsController.provisioner`. Each defaults to `5`; set a lower level,
+including `0`, to reduce log volume.
+
  - Pool pattern based volume provisioning
 StorageClasses may now select the ZFS pool with a regular expression, using the
 new `poolpattern` parameter in place of `poolname`, so that a single

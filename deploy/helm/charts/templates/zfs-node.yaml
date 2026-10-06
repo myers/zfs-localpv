@@ -51,7 +51,7 @@ spec:
           image: {{ include "zfslocalpv.common.image" (dict "imageRoot" .Values.zfsNode.driverRegistrar.image "global" .Values.global) | quote }}
           imagePullPolicy: {{ default .Values.zfsNode.driverRegistrar.image.pullPolicy .Values.global.imagePullPolicy }}
           args:
-            - "--v=5"
+            - "--v={{ .Values.zfsNode.driverRegistrar.logLevel }}"
             - "--csi-address=$(ADDRESS)"
             - "--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)"
           lifecycle:

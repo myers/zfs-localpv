@@ -46,7 +46,7 @@ spec:
         - name: {{ .Values.zfsController.resizer.name }}
           image: {{ include "zfslocalpv.common.image" (dict "imageRoot" .Values.zfsController.resizer.image "global" .Values.global) | quote }}
           args:
-            - "--v=5"
+            - "--v={{ .Values.zfsController.resizer.logLevel }}"
             - "--csi-address=$(ADDRESS)"
             {{- include "zfslocalpv.zfsController.leaderElection" . | indent 12 }}
           {{- range .Values.zfsController.resizer.extraArgs }}
@@ -83,7 +83,7 @@ spec:
         - name: {{ .Values.zfsController.snapshotController.name }}
           image: {{ include "zfslocalpv.common.image" (dict "imageRoot" .Values.zfsController.snapshotController.image "global" .Values.global) | quote }}
           args:
-            - "--v=5"
+            - "--v={{ .Values.zfsController.snapshotController.logLevel }}"
             {{- include "zfslocalpv.zfsController.leaderElection" . | indent 12 }}
           {{- range .Values.zfsController.snapshotController.extraArgs }}
             - {{ tpl . $ | quote }}
@@ -97,7 +97,7 @@ spec:
           imagePullPolicy: {{ default .Values.zfsController.provisioner.image.pullPolicy .Values.global.imagePullPolicy }}
           args:
             - "--csi-address=$(ADDRESS)"
-            - "--v=5"
+            - "--v={{ .Values.zfsController.provisioner.logLevel }}"
             - "--feature-gates=Topology=true"
             - "--strict-topology"
             - "--enable-capacity={{ .Values.feature.storageCapacity }}"
